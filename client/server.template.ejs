@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="dns-prefetch" href="//cdn.bootcss.com">
+
+  <%%- meta %>
+
+  <%%- title %>
+
+  <%%- link %>
+
+  <%%- style %>
+
+  <style id="jss-server-side">
+    <%%- materialCss %>
+  </style>
+
+</head>
+<body>
+<div id="root"><%%- appString %></div>
+
+<script>
+
+  window.onerror = function () {
+    var errmsg = "message=" + arguments[0] + "&source=" + arguments[1] + "&lineno=" + arguments[2] + "&colno=" + arguments[3];
+    if (arguments[4] && typeof arguments[4] === 'object') {
+      errmsg = errmsg + "&stack=" + arguments[4].stack
+    }
+    reportError(errmsg);
+    return true;
+  }
+
+  function reportError (error) {
+    var reportUrl = '/error/report?';
+    new Image().src = reportUrl + error;
+  }
+
+  window.addEventListener("error", function (e) {
+    if (e.target !== window) {
+      reportResourcesError('message=' + e.target.outerHTML)
+    }
+  }, true)
+
+  function reportResourcesError(error) {
+    var reportUrl = '/error/resource?'
+    new Image().src = reportUrl + error
+  }
+
+  window.addEventListener("unhandledrejection", function(e){
+    // Event新增属性
+    // @prop {Promise} promise - 状态为rejected的Promise实例
+    // @prop {String|Object} reason - 异常信息或rejected的内容
+    // 会阻止异常继续抛出，不让Uncaught(in promise) Error产生
+    e.preventDefault()
+    var reportUrl = '/error/other?'
+    new Image().src = reportUrl + "message=" + e.reason
+  })
+
+  function reportAxiosPostError(error, path) {
+    var reportUrl = '/error/axios'
+    new Image().src = reportUrl + '?message=' + error + '&path=' + path
+  }
+</script>
+
+
+<script src="//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js" crossorigin></script>
+
+<script>
+  if ('addEventListener' in document) {
+    document.addEventListener('DOMContentLoaded', function() {
+      FastClick.attach(document.body);
+    }, false);
+  }
+  if(!window.Promise) {
+    document.writeln('<script src="//cdn.bootcss.com/es6-promise/3.2.2/es6-promise.min.js"'+' crossorigin >'+'<'+'/'+'script>');
+  }
+</script>
+
+<script>
+  window.__INITIAL__STATE__ = <%%- initialState%>;
+  window.__GLOBAL__INFO__ = <%%- globalInfo%>;
+</script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+{
+  "presets": [
+    "env",
+    "stage-1",
+    "react"
+  ],
+  "plugins": [
+    ["import", { "libraryName": "antd-mobile", "style": "css" }],
+    ["transform-imports", {
+      "lodash": {
+        "transform": "lodash/${member}",
+        "preventFullImport": true
+      }
+    }],
+    "transform-decorators-legacy",
+    "react-hot-loader/babel",
+    "css-modules-transform"
+  ]
+}
