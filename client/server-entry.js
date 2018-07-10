@@ -6,9 +6,10 @@ import configureStore from './store/store'
 import App from './views/App'
 
 const store = configureStore()
+
 export { store }
 
-export default (store, routerContext, sheetsRegistry, jss, url, helmetContext) => (
+export default (store, routerContext, url, helmetContext) => (
   <Provider store={store}>
     <StaticRouter context={routerContext} location={url}>
       <HelmetProvider context={helmetContext}>
