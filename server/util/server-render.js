@@ -10,7 +10,7 @@ module.exports = (bundle, template, req, res) => {
     const routerContext = {}
     const helmetContext = {}
 
-    const app = createApp(store, routerContext, req.url, helmetContext)
+    const app = createApp(routerContext, req.url, helmetContext)
 
     bootstrapper(app, {}, {
       reqHeaders: req.headers
