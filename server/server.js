@@ -12,6 +12,8 @@ const app = express()
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
+app.use('/data', require('./util/proxy'))
+
 if (!isDev) {
   const serverEntry = require('../dist/server-entry')
   const template = fs.readFileSync(path.join(__dirname, '../dist/server.ejs'), 'utf8')

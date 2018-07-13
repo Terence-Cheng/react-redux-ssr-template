@@ -61,20 +61,6 @@
   }
 </script>
 
-
-<script src="//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js" crossorigin></script>
-
-<script>
-  if ('addEventListener' in document) {
-    document.addEventListener('DOMContentLoaded', function() {
-      FastClick.attach(document.body);
-    }, false);
-  }
-  if(!window.Promise) {
-    document.writeln('<script src="//cdn.bootcss.com/es6-promise/3.2.2/es6-promise.min.js"'+' crossorigin >'+'<'+'/'+'script>');
-  }
-</script>
-
 <script>
   window.__INITIAL__STATE__ = <%%- initialState%>;
   window.__GLOBAL__INFO__ = <%%- globalInfo%>;

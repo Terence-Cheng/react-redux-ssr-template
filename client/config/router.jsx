@@ -2,12 +2,7 @@ import React from 'react'
 import {
   Route, Switch,
 } from 'react-router-dom'
-
-function Index() {
-  return (
-    <div>index</div>
-  )
-}
+import Index from '../views/index'
 
 export default () => (
   <Switch>

@@ -13,8 +13,7 @@ module.exports = (bundle, template, req, res) => {
     const app = createApp(store, routerContext, req.url, helmetContext)
 
     bootstrapper(app, {}, {
-      reqHeaders: req.headers,
-      reqIp: req.ip
+      reqHeaders: req.headers
     }).then(() => {
       if (routerContext.url) {
         res.redirect(routerContext.url)
