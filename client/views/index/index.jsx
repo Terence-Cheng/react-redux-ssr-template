@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import Helmet from 'react-helmet-async'
 import { connect } from 'react-redux'
 import { getTopicList } from './redux/action'
+import style from './css/index.scss'
 
 @connect(
   state => ({
@@ -44,7 +45,7 @@ export default class Index extends React.Component {
         <Helmet>
           <title>cnode社区标题</title>
         </Helmet>
-        <div>{JSON.stringify(topicList)}</div>
+        <div className={style.test}>{JSON.stringify(topicList)}</div>
       </div>
     )
   }
