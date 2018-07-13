@@ -1,5 +1,5 @@
 const webpackMerge = require('webpack-merge')
-const baseConfig = require('./webpack.dev.server')
+const baseConfig = require('./webpack.base.server')
 
 module.exports = webpackMerge(baseConfig, {
   mode: 'production'

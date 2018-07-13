@@ -12,7 +12,7 @@ const app = express()
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
-if (true || !isDev) {
+if (!isDev) {
   const serverEntry = require('../dist/server-entry')
   const template = fs.readFileSync(path.join(__dirname, '../dist/server.ejs'), 'utf8')
   app.use('/public', express.static(path.join(__dirname, '../dist'), {
