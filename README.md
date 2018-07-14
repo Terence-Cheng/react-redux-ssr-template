@@ -1,6 +1,6 @@
 # react redux 服务端渲染（同构）实战总结
 
-标签： react redux 服务端渲染 同构
+react redux 服务端渲染 同构
 
 ---
 
@@ -8,7 +8,7 @@
 ## 有关服务端渲染
 
 关于什么是服务端渲染，为什么用服务端渲染及什么是同构这里就不多做介绍，关于它们的介绍很多，可参考[链接][1]
-## [项目demo链接][5]
+## [项目demo链接][2]
 
 
 ## 渲染流程 
@@ -20,12 +20,12 @@ op3=>operation: 步骤三：执行bootstrap函数，一般是异步请求，用�
 op4=>operation: 步骤四：执行renderToString方法拿到页面html的字符串
 op5=>operation: 步骤五：执行store.getState()获取页面的初始化store，页面的title meta等标签
 op6=>operation: 步骤六：将上面两个步骤获得的数据，传入到到ejs模板中，并res.send来返回给浏览器
-op7=>operation: 步骤七：客户端显示页面并加载script标签中的js，执行客户端入口app.js函数，获取上述步骤设置的初始化store数据并挂载react组件
+op7=>operation: 步骤七：执行客户端入口app.js，获取上述步骤设置的初始化store数据并挂载react组件
 e=>end
 
 st->op->op2->op3->op4->op5->op6->op7->e
 ```
-
+![渲染流程][3]
 ## 关键点
 * 客户端与服务端用到的组件是一样的，但是两者的入口不一样。
 服务端组件的入口server-entry.js代码 
@@ -61,7 +61,7 @@ export default (routerContext, url, helmetContext) => (
 
 ```
 
-* react-async-bootstrapper 具体介绍可看[链接][2]
+* react-async-bootstrapper 具体介绍可看[链接][4]
 可在react组件上执行方法，可用于数据的获取。
 可在服务端执行bootstrap方法用来获取页面的数据，注意返回一个promise
 ```javascript
@@ -84,7 +84,7 @@ export default class Index extends React.Component {
   }
 }
 ```
-* react-helmet-async 具体介绍可见[链接][3]
+* react-helmet-async 具体介绍可见[链接][5]
  可在react组件中设置title meta等标签
 
 * 在浏览器中输入url，页面的请求被node接受到后。
@@ -193,7 +193,7 @@ const render = (Component) => {
 
 ## 遇到的其他问题
 * 服务端执行bootstrap发起请求获取数据时，请求头等信息会丢失，比如req.headers,ip等信息。
-解决方案：bootstrap方法的第三个参数中的数据会设置到react context里。具体说明见[文档][2]
+解决方案：bootstrap方法的第三个参数中的数据会设置到react context里。具体说明见[文档][6]
 ```javascript
 // \server\util\server-render.js
  bootstrapper(app, {}, {
@@ -252,11 +252,13 @@ const baseUrl = process.env.API_BASE || '' // 服务端渲染请求的url必须�
 ```
 
 * import css 使用style-loader失效，因为服务端没有document对象，因此使用提取css文件的形式
- 后面在总结项目时，发现[webpack-isomorphic][4]可以设置style里面的样式
+ 后面在总结项目时，发现[webpack-isomorphic][7]可以设置style里面的样式
 
 
   [1]: https://juejin.im/entry/58f484fd44d904006c034079
-  [2]: https://www.npmjs.com/package/react-async-bootstrapper
-  [3]: https://www.npmjs.com/package/react-helmet-async
-  [4]: https://www.npmjs.com/package/webpack-isomorphic
-  [5]: https://github.com/buyixiaojiang/react-redux-ssr-template
+  [2]: https://github.com/buyixiaojiang/react-redux-ssr-template
+  [3]: https://wscdn.ql1d.com/74305478773127965032.png
+  [4]: https://www.npmjs.com/package/react-async-bootstrapper
+  [5]: https://www.npmjs.com/package/react-helmet-async
+  [6]: https://www.npmjs.com/package/react-async-bootstrapper
+  [7]: https://www.npmjs.com/package/webpack-isomorphic
