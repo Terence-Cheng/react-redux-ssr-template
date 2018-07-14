@@ -257,7 +257,7 @@ const baseUrl = process.env.API_BASE || '' // 服务端渲染请求的url必须�
 
   [1]: https://juejin.im/entry/58f484fd44d904006c034079
   [2]: https://github.com/buyixiaojiang/react-redux-ssr-template
-  [3]: https://wscdn.ql1d.com/74305478773127965032.png
+  [3]: https://wscdn.ql1d.com/38727889489664957980.png
   [4]: https://www.npmjs.com/package/react-async-bootstrapper
   [5]: https://www.npmjs.com/package/react-helmet-async
   [6]: https://www.npmjs.com/package/react-async-bootstrapper
