@@ -4,8 +4,8 @@ const ReactDomServer = require('react-dom/server')
 
 module.exports = (bundle, template, req, res) => {
   return new Promise((resolve, reject) => {
-    const store = bundle.store
-    const createApp = bundle.default
+    const store = bundle.store // 获取store
+    const createApp = bundle.default // 获取server-entry输出的函数
 
     const routerContext = {}
     const helmetContext = {}

@@ -11,10 +11,10 @@ const store = configureStore()
 export { store }
 
 /**
- * 服务端组件渲染的入口
- * @param routerContext 可在nodez中判断是否有重定向
+ * 服务端组件渲染的入口——在服务端执行
+ * @param routerContext，传入一个空对象，可在node中判断是否有重定向
  * @param url 当前页面请求的url
- * @param helmetContext 可在node中获取title description 等信息
+ * @param helmetContext 传入一个空对象，可在node中获取title description 等信息
  * @returns {*}
  */
 export default (routerContext, url, helmetContext) => (
