@@ -1,14 +1,16 @@
 # react redux 服务端渲染（同构）实战总结
 
-react redux 服务端渲染 同构
+标签（空格分隔）： react redux 服务端渲染 同构
 
 ---
 
+## 说明
+此项目大部分参考了[Jokcy][1]在某网课的教程，然后加以实践与改进
 
 ## 有关服务端渲染
 
-关于什么是服务端渲染，为什么用服务端渲染及什么是同构这里就不多做介绍，关于它们的介绍很多，可参考[链接][1]
-## [项目demo链接][2]
+关于什么是服务端渲染，为什么用服务端渲染及什么是同构这里就不多做介绍，关于它们的介绍很多，可参考[链接][2]
+## [项目demo链接][3]
 
 
 ## 渲染流程 
@@ -25,7 +27,7 @@ e=>end
 
 st->op->op2->op3->op4->op5->op6->op7->e
 ```
-![渲染流程][3]
+![渲染流程][4]
 ## 关键点
 * 客户端与服务端用到的组件是一样的，但是两者的入口不一样。
 服务端组件的入口server-entry.js代码 
@@ -61,7 +63,7 @@ export default (routerContext, url, helmetContext) => (
 
 ```
 
-* react-async-bootstrapper 具体介绍可看[链接][4]
+* react-async-bootstrapper 具体介绍可看[链接][5]
 可在react组件上执行方法，可用于数据的获取。
 可在服务端执行bootstrap方法用来获取页面的数据，注意返回一个promise
 ```javascript
@@ -84,7 +86,7 @@ export default class Index extends React.Component {
   }
 }
 ```
-* react-helmet-async 具体介绍可见[链接][5]
+* react-helmet-async 具体介绍可见[链接][6]
  可在react组件中设置title meta等标签
 
 * 在浏览器中输入url，页面的请求被node接受到后。
@@ -193,7 +195,7 @@ const render = (Component) => {
 
 ## 遇到的其他问题
 * 服务端执行bootstrap发起请求获取数据时，请求头等信息会丢失，比如req.headers,ip等信息。
-解决方案：bootstrap方法的第三个参数中的数据会设置到react context里。具体说明见[文档][6]
+解决方案：bootstrap方法的第三个参数中的数据会设置到react context里。具体说明见[文档][7]
 ```javascript
 // \server\util\server-render.js
  bootstrapper(app, {}, {
@@ -252,13 +254,14 @@ const baseUrl = process.env.API_BASE || '' // 服务端渲染请求的url必须�
 ```
 
 * import css 使用style-loader失效，因为服务端没有document对象，因此使用提取css文件的形式
- 后面在总结项目时，发现[webpack-isomorphic][7]可以设置style里面的样式
+ 后面在总结项目时，发现[webpack-isomorphic][8]可以设置style里面的样式
 
 
-  [1]: https://juejin.im/entry/58f484fd44d904006c034079
-  [2]: https://github.com/buyixiaojiang/react-redux-ssr-template
-  [3]: https://wscdn.ql1d.com/38727889489664957980.png
-  [4]: https://www.npmjs.com/package/react-async-bootstrapper
-  [5]: https://www.npmjs.com/package/react-helmet-async
-  [6]: https://www.npmjs.com/package/react-async-bootstrapper
-  [7]: https://www.npmjs.com/package/webpack-isomorphic
+  [1]: https://github.com/Jokcy
+  [2]: https://juejin.im/entry/58f484fd44d904006c034079
+  [3]: https://github.com/buyixiaojiang/react-redux-ssr-template
+  [4]: https://wscdn.ql1d.com/38727889489664957980.png
+  [5]: https://www.npmjs.com/package/react-async-bootstrapper
+  [6]: https://www.npmjs.com/package/react-helmet-async
+  [7]: https://www.npmjs.com/package/react-async-bootstrapper
+  [8]: https://www.npmjs.com/package/webpack-isomorphic
